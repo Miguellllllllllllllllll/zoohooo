@@ -45,18 +45,14 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            ZOHOOO
+            ZOOHOOO
           </Typography>
 
           {/* Avatar Icon */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AccountCircleIcon
-                  sx={{
-                    width: "50px",
-                  }}
-                />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
+                <AccountCircleIcon />
               </IconButton>
             </Tooltip>
             <Menu
