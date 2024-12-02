@@ -21,6 +21,8 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 export default function Modal() {
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState(""); // State for name input
+  const [isNameValid, setIsNameValid] = React.useState(); // State for validation feedback
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,6 +30,7 @@ export default function Modal() {
 
   const handleClose = () => {
     setOpen(false);
+    setIsNameValid(undefined);
   };
 
   const options = [
@@ -48,6 +51,29 @@ export default function Modal() {
     "Panda",
   ];
 
+  const checkValid = (value) => {
+    const isValid = value.trim().length >= 3;
+    setIsNameValid(isValid);
+  };
+
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+    checkValid(value); // Trigger validation on change
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (!isNameValid) {
+      alert("Please provide a valid name.");
+      return;
+    }
+    const formData = new FormData(event.currentTarget);
+    const formJson = Object.fromEntries(formData.entries());
+    console.log(formJson);
+    handleClose();
+  };
+
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -58,14 +84,7 @@ export default function Modal() {
         onClose={handleClose}
         PaperProps={{
           component: "form",
-          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries((formData as any).entries());
-            const email = formJson.email;
-            console.log(email);
-            handleClose();
-          },
+          onSubmit: handleFormSubmit,
         }}
       >
         <Box
@@ -77,7 +96,18 @@ export default function Modal() {
           }}
         >
           <DialogTitle>Add new Animal</DialogTitle>
-          <TextField id="outlined-basic" label="Name" variant="outlined" />
+          <TextField
+            id="name"
+            name="name"
+            label="Name"
+            variant="outlined"
+            value={name}
+            onChange={handleNameChange}
+            error={isNameValid != undefined && !isNameValid}
+            {...isNameValid ? {color: "success"} : ""}
+            helperText={isNameValid != undefined && !isNameValid ? "Name must be at least 3 characters long." : ""}
+            {...isNameValid ? focus : ""}
+          />
           <Autocomplete
             disablePortal
             options={options}
@@ -87,22 +117,17 @@ export default function Modal() {
           <FormControl fullWidth>
             <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-amount"
+              id="amount"
+              name="amount"
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
               label="Amount"
             />
           </FormControl>
-          <TextField
-            error
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-          />
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Subscribe</Button>
+            <Button type="submit">Submit</Button>
           </DialogActions>
         </Box>
       </Dialog>
