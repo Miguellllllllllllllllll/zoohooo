@@ -1,11 +1,23 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import DialogTitle from "@mui/material/DialogTitle";
+import Autocomplete from "@mui/material/Autocomplete";
+import FormHelperText from "@mui/material/FormHelperText";
 
 export default function Modal() {
   const [open, setOpen] = React.useState(false);
@@ -17,6 +29,24 @@ export default function Modal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const options = [
+    "Lion",
+    "Tiger",
+    "Cebra",
+    "Elephant",
+    "Giraffe",
+    "Leopard",
+    "Zebra",
+    "Panther",
+    "Cheetah",
+    "Wolf",
+    "Bear",
+    "Fox",
+    "Kangaroo",
+    "Koala",
+    "Panda",
+  ];
 
   return (
     <React.Fragment>
@@ -38,28 +68,43 @@ export default function Modal() {
           },
         }}
       >
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
+        <Box
+          sx={{
+            p: 4,
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+          }}
+        >
+          <DialogTitle>Add new Animal</DialogTitle>
+          <TextField id="outlined-basic" label="Name" variant="outlined" />
+          <Autocomplete
+            disablePortal
+            options={options}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Animals" />}
           />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
-        </DialogActions>
+          <FormControl fullWidth>
+            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
+              label="Amount"
+            />
+          </FormControl>
+          <TextField
+            error
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+          />
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit">Subscribe</Button>
+          </DialogActions>
+        </Box>
       </Dialog>
     </React.Fragment>
   );
