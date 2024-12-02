@@ -39,7 +39,7 @@ function ResponsiveAppList() {
                 <strong>Tierart</strong>
               </TableCell>
               <TableCell>
-                <strong>Preis (€)</strong>
+                <strong>Preis (CHF)</strong>
               </TableCell>
               <TableCell>
                 <strong>Geburtstag</strong>
