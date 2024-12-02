@@ -50,7 +50,7 @@ export default function Modal() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{ mt: "100px" }}>
         Open form dialog
       </Button>
       <Dialog
