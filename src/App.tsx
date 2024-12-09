@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { useState } from "react";
 
 function App() {
-  const [isOpenModal, setOpenModal] = useState("false");
+  const [isOpenModal, setOpenModal] = useState(false);
   return (
     <>
       <ResponsiveAppBar />
