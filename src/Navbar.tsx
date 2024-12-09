@@ -24,7 +24,7 @@ function ResponsiveAppBar() {
   return (
     <>
       {" "}
-      <AppBar position="static">
+      <AppBar>
         {" "}
         <Container maxWidth="xl">
           {" "}
