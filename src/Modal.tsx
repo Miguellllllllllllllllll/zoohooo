@@ -106,7 +106,19 @@ export default function Modal() {
             error={isNameValid != undefined && !isNameValid}
             {...isNameValid ? {color: "success"} : ""}
             helperText={isNameValid != undefined && !isNameValid ? "Name must be at least 3 characters long." : ""}
-            {...isNameValid ? focus : ""}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: isNameValid ? "green" : "red", // Green if valid, red if invalid
+                },
+                "&:hover fieldset": {
+                  borderColor: isNameValid ? "darkgreen" : "darkred", // Darker on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: isNameValid ? "green" : "red", // Green when focused if valid
+                },
+              },
+            }}
           />
           <Autocomplete
             disablePortal
