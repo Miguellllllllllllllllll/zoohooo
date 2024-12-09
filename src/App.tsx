@@ -10,7 +10,7 @@ function App() {
     <>
       <ResponsiveAppBar />
       <ResponsiveAppList setOpenModal={setOpenModal}/>
-      <Modal isOpenModal={isOpenModal}></Modal>
+      <Modal isOpenModal={isOpenModal} setOpenModal={setOpenModal}></Modal>
     </>
   );
 }

@@ -19,17 +19,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Autocomplete from "@mui/material/Autocomplete";
 import FormHelperText from "@mui/material/FormHelperText";
 
-export default function Modal() {
-  const [open, setOpen] = React.useState(false);
+export default function Modal({isOpenModal, setOpenModal}) {
   const [name, setName] = React.useState(""); // State for name input
   const [isNameValid, setIsNameValid] = React.useState(); // State for validation feedback
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false)
     setIsNameValid(undefined);
   };
 
@@ -73,11 +68,11 @@ export default function Modal() {
     console.log(formJson);
     handleClose();
   };
-
+console.log(isOpenModal);
   return (
     <React.Fragment>
       <Dialog
-        open={open}
+        open={isOpenModal}
         onClose={handleClose}
         PaperProps={{
           component: "form",

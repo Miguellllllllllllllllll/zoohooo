@@ -19,7 +19,7 @@ const animals = [
   { name: "Max", species: "Papagei", price: 600, birthday: "2022-01-05" },
 ];
 
-function ResponsiveAppList({}) {
+function ResponsiveAppList({setOpenModal}) {
   return (
     <Box sx={{ padding: 2 }}>
       <Typography
@@ -60,7 +60,7 @@ function ResponsiveAppList({}) {
           </TableBody>
         </Table>
       </TableContainer>
-      <Fab color="primary" aria-label="add" onClick={handleClickOpen} style={
+      <Fab color="primary" aria-label="add" onClick={setOpenModal} style={
           {position: 'absolute',
           bottom: 16,
           right: 16,}
