@@ -21,11 +21,17 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 export default function Modal({isOpenModal, setOpenModal}) {
   const [name, setName] = React.useState(""); // State for name input
-  const [isNameValid, setIsNameValid] = React.useState(); // State for validation feedback
+  const [amount, setAmount] = React.useState("");
+  const [isNameValid, setIsNameValid] = React.useState<undefined | boolean>(undefined); // State for validation feedback
+  const [isAmountValid, setIsAmountValid] = React.useState<undefined | boolean>(undefined); // State for validation feedback
+
 
   const handleClose = () => {
     setOpenModal(false)
     setIsNameValid(undefined);
+    setIsAmountValid(undefined);
+    setAmount("");
+    setName("");
   };
 
   const options = [
@@ -46,21 +52,34 @@ export default function Modal({isOpenModal, setOpenModal}) {
     "Panda",
   ];
 
-  const checkValid = (value) => {
+  const checkValidName = (value:string) => {
     const isValid = value.trim().length >= 3;
     setIsNameValid(isValid);
   };
 
-  const handleNameChange = (event) => {
+  const checkValidAmount = (value: string) => {
+    const regex = /^-?\d{1,}(?:\.\d{1,2})?$/;
+    const isValid = regex.test(value);
+    setIsAmountValid(isValid);
+  };
+  
+
+  const handleNameChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setName(value);
-    checkValid(value); // Trigger validation on change
+    checkValidName(value); // Trigger validation on change
   };
 
-  const handleFormSubmit = (event) => {
+  const handleAmountChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setAmount(amount);
+    checkValidAmount(value); // Trigger validation on change
+  };
+
+  const handleFormSubmit = (event:React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (!isNameValid) {
-      alert("Please provide a valid name.");
+      alert("Please provide a valid name."); //TODO change that.
       return;
     }
     const formData = new FormData(event.currentTarget);
@@ -98,19 +117,6 @@ console.log(isOpenModal);
             error={isNameValid != undefined && !isNameValid}
             {...isNameValid ? {color: "success"} : ""}
             helperText={isNameValid != undefined && !isNameValid ? "Name must be at least 3 characters long." : ""}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: isNameValid ? "green" : "red", // Green if valid, red if invalid
-                },
-                "&:hover fieldset": {
-                  borderColor: isNameValid ? "darkgreen" : "darkred", // Darker on hover
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: isNameValid ? "green" : "red", // Green when focused if valid
-                },
-              },
-            }}
           />
           <Autocomplete
             disablePortal
@@ -127,6 +133,10 @@ console.log(isOpenModal);
                 <InputAdornment position="start">$</InputAdornment>
               }
               label="Amount"
+              onChange={handleAmountChange}
+              error={isAmountValid != undefined && !isAmountValid}
+              {...isAmountValid ? {color: "success"} : ""}
+              helperText={isAmountValid != undefined && !isAmountValid ? "Amount ist nicht valid" : ""}
             />
           </FormControl>
           <DialogActions>

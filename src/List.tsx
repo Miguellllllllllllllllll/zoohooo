@@ -26,7 +26,7 @@ function ResponsiveAppList({setOpenModal}) {
         variant="h4"
         component="h1"
         gutterBottom
-        sx={{ textAlign: "center", marginBottom: 3 }}
+        sx={{ textAlign: "center", marginBottom: 3}}
       >
         Tierliste
       </Typography>
@@ -61,9 +61,8 @@ function ResponsiveAppList({setOpenModal}) {
         </Table>
       </TableContainer>
       <Fab color="primary" aria-label="add" onClick={setOpenModal} style={
-          {position: 'absolute',
-          bottom: 16,
-          right: 16,}
+          {bottom: "70px",
+            left: "96%"}
       }>
         <AddIcon />
       </Fab>
