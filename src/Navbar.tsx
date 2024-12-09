@@ -9,7 +9,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Modal from "./Modal";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -84,7 +83,6 @@ function ResponsiveAppBar() {
           </Toolbar>{" "}
         </Container>{" "}
       </AppBar>{" "}
-      <Modal></Modal>{" "}
     </>
   );
 }

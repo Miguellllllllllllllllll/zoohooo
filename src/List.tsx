@@ -8,6 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Fab } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 // Beispiel-Daten
 const animals = [
@@ -17,7 +19,7 @@ const animals = [
   { name: "Max", species: "Papagei", price: 600, birthday: "2022-01-05" },
 ];
 
-function ResponsiveAppList() {
+function ResponsiveAppList({}) {
   return (
     <Box sx={{ padding: 2 }}>
       <Typography
@@ -58,6 +60,13 @@ function ResponsiveAppList() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen} style={
+          {position: 'absolute',
+          bottom: 16,
+          right: 16,}
+      }>
+        <AddIcon />
+      </Fab>
     </Box>
   );
 }
