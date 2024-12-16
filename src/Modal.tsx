@@ -25,7 +25,6 @@ import dayjs from "dayjs";
 import 'dayjs/locale/de-ch';
 
 const currentDate = dayjs();
-let errorMessage:String = "";
 
 interface ModalProps {
   isOpenModal: boolean;
