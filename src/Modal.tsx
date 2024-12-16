@@ -43,7 +43,7 @@ export default function Modal({ isOpenModal, setOpenModal } :ModalProps) {
   const [error, setError] = React.useState<DateValidationError | null>(null);
   const [selectedDate, setSelectedDate] = React.useState<dayjs.Dayjs | null>(null);
   const [errorMessage, setErrorMessage] = React.useState<string>("");
-  
+  const [errorMessageName, setErrorMessageName] = React.useState<string>("");
   React.useEffect(() => {
     console.log(error);
     switch (error) {
@@ -100,9 +100,14 @@ export default function Modal({ isOpenModal, setOpenModal } :ModalProps) {
   ];
 
   const checkValidName = (value: string) => {
-    // const regex = /^[/d][a-z]*$/;
-    // const isValid = regex.test(value);
     let isValid = (value[0].toUpperCase() === value[0]) ? true : false;
+    if(isValid) {
+      const regexValid = /^[^\d][a-z]*$/;
+        isValid = regexValid.test(value);
+    } else {
+      setErrorMessageName("Name must start with uppercase charackter");
+    }
+    isValid !&& setErrorMessageName("Name is invalid")
     setIsNameValid(isValid);
   };
 
@@ -166,7 +171,7 @@ export default function Modal({ isOpenModal, setOpenModal } :ModalProps) {
             {...(isNameValid ? { color: "success" } : "")}
             helperText={
               isNameValid != undefined && !isNameValid
-                ? "Name must start with a big Charackter."
+                ? errorMessageName
                 : ""
             }
           />
